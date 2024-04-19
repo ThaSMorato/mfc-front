@@ -1,0 +1,6 @@
+{
+  "extends": ["@thasmorato/eslint-config/react"],
+  "rules": {
+    "no-useless-constructor": "off"
+  }
+}
