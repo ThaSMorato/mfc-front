@@ -3,7 +3,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 export interface NurseProps {
   email: string
-  password: string
+  password?: string | null
   name: string
 }
 
