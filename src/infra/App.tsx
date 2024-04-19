@@ -1,6 +1,7 @@
 import { HealthUnitContextProvider } from './mfc/hooks/useHealthUnit'
 import { NurseContextProvider } from './mfc/hooks/useNurse'
 import { NurseShiftContextProvider } from './mfc/hooks/useNurseShift'
+import { ToastContextProvider } from './mfc/hooks/useToast'
 import { HomePage } from './ui/pages/home'
 
 export const App = () => {
@@ -8,7 +9,9 @@ export const App = () => {
     <NurseContextProvider>
       <NurseShiftContextProvider>
         <HealthUnitContextProvider>
-          <HomePage />
+          <ToastContextProvider>
+            <HomePage />
+          </ToastContextProvider>
         </HealthUnitContextProvider>
       </NurseShiftContextProvider>
     </NurseContextProvider>
