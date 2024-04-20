@@ -25,9 +25,9 @@
       "$/*" : ["./test/*"]
     },
     "types": [
-      "vitest/globals",
+      "vitest/globals", "cypress"
     ]
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
