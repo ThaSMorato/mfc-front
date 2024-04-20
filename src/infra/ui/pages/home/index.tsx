@@ -8,7 +8,7 @@ export const HomePage = () => {
     <>
       <Header />
       <main>
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box padding="16px">
           <HealthUnitList />
         </Box>
       </main>

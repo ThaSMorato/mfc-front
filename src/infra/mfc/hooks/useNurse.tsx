@@ -77,28 +77,21 @@ export const NurseContextProvider = ({
     password,
     email,
   }: HandleAuthenticationParams) => {
-    try {
-      setIsAuthenticateLoading(true)
-      const response = await authenticateUseCase.execute({ email, password })
+    setIsAuthenticateLoading(true)
+    const response = await authenticateUseCase.execute({ email, password })
 
-      if (response.isRight()) {
-        const { accessToken } = response.value
+    if (response.isRight()) {
+      const { accessToken } = response.value
 
-        localStorage.setItem(
-          EnvService.get('VITE_APP_STORAGE_FLAG'),
-          accessToken,
-        )
+      localStorage.setItem(EnvService.get('VITE_APP_STORAGE_FLAG'), accessToken)
 
-        await handleFetchCurrentNurse()
-      } else {
-        const error = response.value
-
-        console.error(error)
-      }
-    } catch (error) {
-      console.error(error)
-    } finally {
+      await handleFetchCurrentNurse()
       setIsAuthenticateLoading(false)
+    } else {
+      setIsAuthenticateLoading(false)
+      const error = response.value
+
+      throw error
     }
   }
 

@@ -8,10 +8,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useNurse } from '@/infra/mfc/hooks/useNurse'
+import { useToast } from '@/infra/mfc/hooks/useToast'
 
 interface LogInModalProps {
   isOpen: boolean
@@ -26,9 +28,14 @@ const logInFormSchema = z.object({
 type LogInFormSchema = z.infer<typeof logInFormSchema>
 
 export const LogInModal = ({ handleClose, isOpen }: LogInModalProps) => {
+  const [error, setError] = useState<string | null>(null)
+
   const {
     authenticate: { authenticateFunction },
   } = useNurse()
+
+  const { showToast } = useToast()
+
   const {
     formState: { errors, isLoading },
     register,
@@ -38,8 +45,15 @@ export const LogInModal = ({ handleClose, isOpen }: LogInModalProps) => {
   })
 
   const handleLogIn = async ({ email, password }: LogInFormSchema) => {
-    await authenticateFunction({ password, email })
-    handleClose()
+    try {
+      setError(null)
+      await authenticateFunction({ password, email })
+      handleClose()
+      showToast('Entrou com sucesso!')
+    } catch (error) {
+      setError('Credenciais inválidas')
+      console.error(error)
+    }
   }
 
   return (
@@ -57,7 +71,7 @@ export const LogInModal = ({ handleClose, isOpen }: LogInModalProps) => {
           autoFocus
           required
           margin="dense"
-          label="Email Address"
+          label="Email"
           type="text"
           fullWidth
           variant="standard"
@@ -73,7 +87,7 @@ export const LogInModal = ({ handleClose, isOpen }: LogInModalProps) => {
           autoFocus
           required
           margin="dense"
-          label="Password"
+          label="Senha"
           type="password"
           fullWidth
           variant="standard"
@@ -85,10 +99,15 @@ export const LogInModal = ({ handleClose, isOpen }: LogInModalProps) => {
             {errors.password.message}
           </Typography>
         )}
+        {!!error && (
+          <Typography variant="body1" color="red" mt={2}>
+            {error}
+          </Typography>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} disabled={isLoading}>
-          Cancel
+          Cancelar
         </Button>
         <Button type="submit" disabled={isLoading}>
           Login

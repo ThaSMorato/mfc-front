@@ -1,5 +1,4 @@
 import {
-  Button,
   Paper,
   Table,
   TableBody,
@@ -12,6 +11,7 @@ import { useEffect, useState } from 'react'
 
 import { useHealthUnit } from '@/infra/mfc/hooks/useHealthUnit'
 
+import { HealthUnitRow } from './health-unit-row'
 import { Pagination } from './pagination'
 
 export const HealthUnitList = () => {
@@ -37,30 +37,18 @@ export const HealthUnitList = () => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="health unit table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Address</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell>Enredeço</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {healthUnits.map((unit) => (
-              <TableRow
-                key={String(unit.id)}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {String(unit.id)}
-                </TableCell>
-                <TableCell>{unit.name}</TableCell>
-                <TableCell>{unit.address}</TableCell>
-                <TableCell align="right">
-                  <Button variant="contained">Shifts</Button>
-                </TableCell>
-              </TableRow>
+              <HealthUnitRow healthUnit={unit} key={String(unit.id)} />
             ))}
           </TableBody>
         </Table>
