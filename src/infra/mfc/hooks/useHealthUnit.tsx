@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from 'react'
 
 import { HealthUnit } from '@/mfc/domain/entities/health-unit'
 
@@ -27,7 +33,7 @@ export const HealthUnitContextProvider = ({
     useState<boolean>(false)
   const [healthUnits, setHealthUnits] = useState<HealthUnit[] | null>(null)
 
-  const handleFetchAllHealthUnits = async (page: number = 1) => {
+  const handleFetchAllHealthUnits = useCallback(async (page: number = 1) => {
     try {
       setIsFetchAllHealthUnitsLoading(true)
       const response = await fetchAllhealthUnitsUseCase.execute({ page })
@@ -43,7 +49,7 @@ export const HealthUnitContextProvider = ({
     } finally {
       setIsFetchAllHealthUnitsLoading(false)
     }
-  }
+  }, [])
 
   return (
     <HealthUnitContext.Provider

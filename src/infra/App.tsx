@@ -1,7 +1,19 @@
+import { HealthUnitContextProvider } from './mfc/hooks/useHealthUnit'
+import { NurseContextProvider } from './mfc/hooks/useNurse'
+import { NurseShiftContextProvider } from './mfc/hooks/useNurseShift'
+import { ToastContextProvider } from './mfc/hooks/useToast'
+import { HomePage } from './ui/pages/home'
+
 export const App = () => {
   return (
-    <>
-      <h1>Hello world</h1>
-    </>
+    <NurseContextProvider>
+      <NurseShiftContextProvider>
+        <HealthUnitContextProvider>
+          <ToastContextProvider>
+            <HomePage />
+          </ToastContextProvider>
+        </HealthUnitContextProvider>
+      </NurseShiftContextProvider>
+    </NurseContextProvider>
   )
 }
