@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# MFC - Medical Facility Coordinator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MFC é uma aplicação desenvolvida para listar postos de saúde, exibir os turnos de cada posto, e permitir que enfermeiros façam login e se candidatem para os turnos.
 
-Currently, two official plugins are available:
+## Tecnologias usadas
+- Vite
+- Vitest
+- Cypress
+- TypeScript
+- axios
+- Zod
+- Material UI
+- Hook Form
+- Node v20.11.1
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Pré-requisitos
 
-## Expanding the ESLint configuration
+Certifique-se de ter a versão correta do Node.js instalada (v20.11.1). Você pode usar o nvm para gerenciar suas versões do Node.js.
+Instalação
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+Clone o repositório e instale as dependências:
+git clone git@github.com:ThaSMorato/mfc-front.git
+cd [nome-do-projeto]
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Variáveis de ambiente
+
+O projeto utiliza as seguintes variáveis de ambiente:
+- `VITE_APP_API_URL` - URL para o backend. [Consulte o repositório do backend para mais detalhes](https://github.com/ThaSMorato/mcf-backend).
+- `VITE_APP_STORAGE_FLAG` - Flag para localStorage, onde será adicionado o token de autenticação.
+As variáveis de ambiente devem ser adicionadas a um arquivo ﻿.env na raiz do projeto.
+
+## Comandos
+
+- Ambiente de Desenvolvimento: `npm run dev`
+- Build do Projeto: `npm run build`
+- Teste Unitário: `npm run test`
+- Teste E2E: `npm run test:e2e`
+
+## Funcionalidades
+
+- Listagem dos postos de saúde
+- Exibição dos turnos em cada posto
+- Login para enfermeiros
+- Possibilidade dos enfermeiros se candidatarem aos turnos disponíveis
